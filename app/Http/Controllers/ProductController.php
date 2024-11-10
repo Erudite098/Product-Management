@@ -13,6 +13,11 @@ class ProductController extends Controller
         $query = Product::query();
 
         // Optional filtering by category or product_name
+        if ($request->has('column') && $request->has('order')) {
+            $query->orderBy($request->input('column'), $request->input('order'));
+        }
+
+
         if ($request->has('category')) {
             $query->where('category', $request->input('category'));
         }
